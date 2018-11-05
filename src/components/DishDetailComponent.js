@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap' ;
+import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap' ;
 
-class DishDetail extends Component {
-  renderDish(dish) {
+  function RenderDish(props) {
     // { new Intl.DateTimeFormat('en-US', {year: 'numeric', month:'short', day:  '2-digit'}).format(new Date(Date.parse(comment.date)))}
-
+    const dish = props.dish;
     if(dish != null)
       return(
         <Card>
@@ -21,13 +20,53 @@ class DishDetail extends Component {
       );
   }
 
-  render() {
+  function RenderComments({comments}) {
+    if(comments != null) {
+      const comments_collection = comments.map((comment) => {
+        return (
+          <Card>
+            <CardTitle>Comments</CardTitle>
+            <CardText>{comment.author}</CardText>
+            <CardText>{comment.comment}</CardText>
+          </Card>
+        );
+      });
+      return comments_collection;
+    }
+    else {
+      return(
+        <div></div>
+      );
+    }
+  }
+
+  const DishDetail = (props) => {
+
     return(
-      <div className="col-12 col-md-5 m-1">
-        {this.renderDish(this.props.dish)}
+      <div className='container'>
+        <div className='row'>
+          <Breadcrumb>
+            <BreadcrumbItem to="/menu">
+              Menu
+            </BreadcrumbItem>
+            <BreadcrumbItem active>
+              {props.dish.name}
+            </BreadcrumbItem>
+          </Breadcrumb>
+        </div>
+        <div className='row'>
+          <div className="col-12 col-md-5 m-1">
+            <RenderDish dish={props.dish} />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-12 col-md-5 m-1'>
+            <RenderComments comments={props.comments}/>
+          </div>
+        </div>
       </div>
     );
   }
-}
 
-export default DishDetail
+
+export default DishDetail;
