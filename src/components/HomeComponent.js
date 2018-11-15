@@ -3,7 +3,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reac
 
 function RenderCard({item}) {
   return (
-    <Card class="menu-card">
+    <Card className="menu-card">
       <CardImg src={item.image} alt={item.name} />
       <CardBody>
         <CardTitle>{item.name}</CardTitle>
