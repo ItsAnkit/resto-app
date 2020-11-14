@@ -4,7 +4,7 @@ import { Reducer, initialState } from './reducer';
 export const ConfigureStore = () => {
   const Store = createStore(
     Reducer,
-    initialState
+    winitialState
   );
 
   return Store;

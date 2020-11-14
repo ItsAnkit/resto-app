@@ -7,6 +7,7 @@ import Home from "./HomeComponent";
 import Contact from './ContactComponent';
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import {}
 
 // connect component to redux store and we can obtain state defined in store and are available as props
 
@@ -17,6 +18,11 @@ const mapStateToProps = state => {
     promotions: state.promotions,
     leaders: state.leaders
   }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  // action object returned from addComment is passed to dispatch method and then, it is dispatched
+  addComment(dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
 }
 
 class Main extends Component {
@@ -67,4 +73,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
